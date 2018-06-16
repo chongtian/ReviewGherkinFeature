@@ -1,6 +1,6 @@
 # P2 Land Review Feature README
 
-This is the README for the extension "P2 Land Review Feature". 
+This is the README for the extension "P2 Land Review Feature".  
 
 ## Features
 
@@ -21,9 +21,7 @@ If the feature file has issues, you will see an information message "Feature fil
 > Tip: To open Output, press Ctrl+Shift+U
 
 
-## Known Issues
-
-
-## Release Notes
+## Source codes
+<a href="https://github.com/chongtian/ReviewP2LandFeature"> Visit GitHub </a>
 
 
