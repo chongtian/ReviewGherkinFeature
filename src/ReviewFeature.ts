@@ -20,23 +20,37 @@ function VerifyReferenceToVstsWorkItems(text: string, channel: vscode.OutputChan
     let regex_workitem = /^\s*Scenario.*$\s*#\s*(Stories:|Bugs:)\s*\d*/igm;
     let regex_testcase = /^\s*(scenario outline\W|scenario\W)\s*TC\d{5,}\s*-/igm;
 
-    let matches_scenario = text.match(regex_scenario);
-    let matches_workitem = text.match(regex_workitem);
-    let matches_testcase = text.match(regex_testcase);
+    let scenario_index = [];
+    let workitem_index = [];
+    let testcase_index = [];
+    let scenarios = [];
 
-    let count_scenarios = matches_scenario == null ? 0 : matches_scenario.length;
-    let count_workitem = matches_workitem == null ? 0 : matches_workitem.length;
-    let count_testcase = matches_testcase == null ? 0 : matches_testcase.length;
-
-    if (count_scenarios > count_workitem) {
-        channel.appendLine('Warning: Found Scenario(s) which is not referred to User Story or Bug.');
-        nonissue = false;
+    let tmpArr;
+    while ((tmpArr = regex_scenario.exec(text)) !== null) {
+        scenario_index.push(tmpArr.index);
+        scenarios.push(tmpArr[0]);
+    }
+    while ((tmpArr = regex_workitem.exec(text)) !== null) {
+        workitem_index.push(tmpArr.index);
+    }
+    while ((tmpArr = regex_testcase.exec(text)) !== null) {
+        testcase_index.push(tmpArr.index);
     }
 
-    if (count_scenarios > count_testcase) {
-        channel.appendLine('Warning: Found Scenario(s) which is not referred to Test Case.');
-        nonissue = false;
+    if (scenario_index.length > workitem_index.length) {
+        for (let i = 0; i < scenario_index.length; i++) {
+            if (workitem_index.indexOf(scenario_index[i]) < 0) {
+                channel.appendLine(`Warning: Found Scenario which is not referred to User Story or Bug: ${scenarios[i]}`);
+                nonissue = false;
+            }
+            if (testcase_index.indexOf(scenario_index[i]) < 0) {
+                channel.appendLine(`Warning: Found Scenario which is not referred to Test Case: ${scenarios[i]}`);
+                nonissue = false;
+            }
+
+        }
     }
+
     return nonissue;
 }
 function VerifyLines(text: string, channel: vscode.OutputChannel): boolean {
@@ -84,8 +98,8 @@ function VerifyLines(text: string, channel: vscode.OutputChannel): boolean {
                 prevCountOfCol = curCountOfCol;
             } else if (line.match(/^\s*$/) == null) {
                 //This line is not blank, which means the table reaches the last row
-                prevCountOfCol=0;
-                curCountOfCol=0
+                prevCountOfCol = 0;
+                curCountOfCol = 0
             }
 
         });
