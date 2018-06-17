@@ -12,7 +12,6 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
 
 ## Install
 This extension is not published to VS Code Marketplace. Thus, please install from local vsix file.
-![](https://github.com/chongtian/ReviewP2LandFeature/blob/master/img/Install.gif)
 
 ## How to use the extension
 
@@ -24,6 +23,7 @@ If the feature file has issues, you will see an information message "Feature fil
 
 > Tip: To open Output, press Ctrl+Shift+U
 
+![](https://github.com/chongtian/ReviewP2LandFeature/blob/master/img/HowToUse.gif)
 
 ## Source codes
 <a href="https://github.com/chongtian/ReviewP2LandFeature"> Visit GitHub </a>
