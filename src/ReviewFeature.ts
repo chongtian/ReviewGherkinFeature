@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 function VerifyMultipleFeatureSections(text: string, channel: vscode.OutputChannel): boolean {
-    let regex = /^feature\W/gim;
+    let regex = /^\s*feature\W/gim;
     let matches = text.match(regex);
     if (matches === null) {
         channel.appendLine('Warning: No Feature section is found.');
