@@ -14,18 +14,16 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
 This extension is not published to VS Code Marketplace. Thus, please install from local vsix file.
 
 ## How to use the extension
-
-After you complet your feature file, press F1 to show Command Palette, and type and execute <b>Review Feature</b>. The extension will review the feature file.
+![](https://raw.githubusercontent.com/chongtian/ReviewP2LandFeature/master/img/HowToUse.gif)
+After you complete your feature file, press F1 to show Command Palette, and type and execute **Review Feature**. The extension will review the feature file.
 > Tip: To open Command Palette, press F1 or Ctrl+Shift+P
 >
-If the feature file passes the review, you will see an information message "Feature file is good".<br>
-If the feature file has issues, you will see an information message "Feature file has issues. Please check output for details". In this case, please open Output and select <b>P2 Land Review Feature</b> from the drop down on the Output. You will then see the details of the issues.
+- If the feature file passes the review, you will see an information message *Feature file is good*.
+- If the feature file has issues, you will see an information message *Feature file has issues. Please check output for details*. In this case, please open Output and select **P2 Land Review Feature** from the drop down on the Output. You will then see the details of the issues.
 
 > Tip: To open Output, press Ctrl+Shift+U
 
-![](https://github.com/chongtian/ReviewP2LandFeature/blob/master/img/HowToUse.gif)
-
 ## Source codes
-<a href="https://github.com/chongtian/ReviewP2LandFeature"> Visit GitHub </a>
+[GitHub](https://github.com/chongtian/ReviewP2LandFeature)
 
 
