@@ -10,6 +10,10 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
 - Each Gherkin scenario should refer to a VSTS Test Case.
 - Each Gherkin scenario should refer to at least one User Story or Bug.
 
+## Install
+This extension is not published to VS Code Marketplace. Thus, please install from local vsix file.
+![](https://github.com/chongtian/ReviewP2LandFeature/blob/master/img/Install.gif)
+
 ## How to use the extension
 
 After you complet your feature file, press F1 to show Command Palette, and type and execute <b>Review Feature</b>. The extension will review the feature file.
