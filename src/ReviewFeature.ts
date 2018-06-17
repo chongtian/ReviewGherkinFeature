@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 function VerifyMultipleFeatureSections(text: string, channel: vscode.OutputChannel): boolean {
     let regex = /^feature\W/gim;
     let matches = text.match(regex);
-    if (matches == null) {
+    if (matches === null) {
         channel.appendLine('Warning: No Feature section is found.');
         return false;
     } else if (matches.length > 1) {
@@ -57,8 +57,10 @@ function VerifyLines(text: string, channel: vscode.OutputChannel): boolean {
     let nonissue = true;
 
     let regex_keywords = /^\s*(background\W|scenario\W|given\s|when\s|then\s|and\s|but\s|examples:|#|@|\|)/gim;
-    let isFeatureSection = true;
+    let regex_table = /^\s*\|/;
+    let regex_blank = /^\s*$/;
 
+    let isFeatureSection = true;
     let prevCountOfCol = 0;
     let curCountOfCol = 0;
 
@@ -69,37 +71,37 @@ function VerifyLines(text: string, channel: vscode.OutputChannel): boolean {
             // each Gherkin line should begin with a Gherkin keyword,
             // unless the line is in the Feature section
             if (!isFeatureSection) {
-                if (line.match(regex_keywords) == null && line.match(/^\s*$/) == null) {
+                if (line.match(regex_keywords) === null && line.match(/^\s*$/) === null) {
                     channel.appendLine(`Error: Line ${i + 1}, line does not begin with Gherkin keyword: ${line}`);
                     nonissue = false;
                 }
             } else {
                 let reg = /^\s*(scenario|background)/gim;
-                if (line.match(reg) != null) {
+                if (line.match(reg) !== null) {
                     isFeatureSection = false;
                 }
             }
             //
 
             // Each table row should have the same number of column
-            if (line.match(/^\s*\|/) != null) {
+            if (regex_table.test(line)) {
                 // This line is a part of a Gherkin table
 
                 curCountOfCol = line.split(/\s*\|\s*/).length;
 
-                if (prevCountOfCol == 0) {
+                if (prevCountOfCol === 0) {
                     prevCountOfCol = curCountOfCol;
                 }
 
-                if (prevCountOfCol != curCountOfCol) {
+                if (prevCountOfCol !== curCountOfCol) {
                     channel.appendLine(`Error: Line ${i + 1}, Table is invalid. Count of Column on previous row: ${prevCountOfCol} and Count of Column on current row: ${curCountOfCol}.`);
                     nonissue = false;
                 }
                 prevCountOfCol = curCountOfCol;
-            } else if (line.match(/^\s*$/) == null) {
+            } else if (!regex_blank.test(line)) {
                 //This line is not blank, which means the table reaches the last row
                 prevCountOfCol = 0;
-                curCountOfCol = 0
+                curCountOfCol = 0;
             }
 
         });
