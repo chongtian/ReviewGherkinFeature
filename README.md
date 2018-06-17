@@ -9,6 +9,8 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
 - Each Gherkin line should begin with a Gherkin keyword, unless this line is part of the Feature section.
 - Each Gherkin scenario should refer to a VSTS Test Case.
 - Each Gherkin scenario should refer to at least one User Story or Bug.
+- Scenario should not have Examples section
+- Scenario Outline should have Examples section
 
 ## Install
 This extension is not published to VS Code Marketplace. Thus, please install from local vsix file.

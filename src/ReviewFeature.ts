@@ -12,6 +12,61 @@ function VerifyMultipleFeatureSections(text: string, channel: vscode.OutputChann
     }
     return true;
 }
+function VerifyScenarioOutlineShouldHaveExamples(text: string, channel: vscode.OutputChannel): boolean {
+
+    let nonissue = true;
+
+    let regex_outline = /^\s*scenario outline.*$/gim;
+    let regex_examples = /^\s*scenario outline(?:[^\n]|\n(?!\s*scenario))+examples/gim;
+
+    let outline_index = [];
+    let example_index = [];
+    let scenarios = [];
+
+    let tmpArr;
+    while ((tmpArr = regex_outline.exec(text)) !== null) {
+        outline_index.push(tmpArr.index);
+        scenarios.push(tmpArr[0]);
+    }
+    while ((tmpArr = regex_examples.exec(text)) !== null) {
+        example_index.push(tmpArr.index);
+    }
+
+    if (outline_index.length > example_index.length) {
+        for (let i = 0; i < outline_index.length; i++) {
+            if (example_index.indexOf(outline_index[i]) < 0) {
+                channel.appendLine(`Error: Found Scenario Outline which has no Examples: ${scenarios[i].trim()}`);
+                nonissue = false;
+            }
+        }
+    }
+
+    return nonissue;
+}
+function VerifyScenarioShouldNotHaveExamples(text: string, channel: vscode.OutputChannel): boolean {
+
+    let nonissue = true;
+
+    let regex_examples = /^\s*scenario:(?:[^\n]|\n(?!\s*scenario))+examples/gim;
+
+    let examples_index = [];
+    let scenarios = [];
+
+    let tmpArr;
+    while ((tmpArr = regex_examples.exec(text)) !== null) {
+        examples_index.push(tmpArr.index);
+        scenarios.push(tmpArr[0].trim().split(/\r?\n/g)[0]);
+    }
+
+    if (scenarios.length > 0) {
+        for (let i = 0; i < scenarios.length; i++) {
+            channel.appendLine(`Error: Found Scenario which has Examples: ${scenarios[i].trim()}`);
+            nonissue = false;
+        }
+    }
+
+    return nonissue;
+}
 function VerifyReferenceToVstsWorkItems(text: string, channel: vscode.OutputChannel): boolean {
 
     let nonissue = true;
@@ -40,11 +95,11 @@ function VerifyReferenceToVstsWorkItems(text: string, channel: vscode.OutputChan
     if (scenario_index.length > workitem_index.length) {
         for (let i = 0; i < scenario_index.length; i++) {
             if (workitem_index.indexOf(scenario_index[i]) < 0) {
-                channel.appendLine(`Warning: Found Scenario which is not referred to User Story or Bug: ${scenarios[i]}`);
+                channel.appendLine(`Warning: Found Scenario which is not referred to User Story or Bug: ${scenarios[i].trim()}`);
                 nonissue = false;
             }
             if (testcase_index.indexOf(scenario_index[i]) < 0) {
-                channel.appendLine(`Warning: Found Scenario which is not referred to Test Case: ${scenarios[i]}`);
+                channel.appendLine(`Warning: Found Scenario which is not referred to Test Case: ${scenarios[i].trim()}`);
                 nonissue = false;
             }
 
@@ -115,6 +170,8 @@ function validate(text: string, channel: vscode.OutputChannel): boolean {
     nonissue = VerifyMultipleFeatureSections(text, channel) && nonissue;
     nonissue = VerifyReferenceToVstsWorkItems(text, channel) && nonissue;
     nonissue = VerifyLines(text, channel) && nonissue;
+    nonissue = VerifyScenarioOutlineShouldHaveExamples(text, channel) && nonissue;
+    nonissue = VerifyScenarioShouldNotHaveExamples(text, channel) && nonissue;
 
     return nonissue;
 }
