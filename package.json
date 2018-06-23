@@ -2,14 +2,14 @@
     "name": "p2landreviewfeature",
     "displayName": "P2 Land Review Feature File",
     "description": "Review feature file following P2 Land team's guideline",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "TonyGao",
     "repository": {
         "type": "git",
         "url": "https://github.com/chongtian/ReviewP2LandFeature.git"
     },
     "engines": {
-        "vscode": "^1.24.0"
+        "vscode": "^1.16.0"
     },
     "categories": [
         "Other"
@@ -24,7 +24,19 @@
                 "command": "extension.reviewFeature",
                 "title": "Review Feature"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "P2 Land team review Gherkin feature file settings",
+            "properties": {
+                "reviewfeature.p2land": {
+                    "description": "Enable extra validation based on guidelines from P2 Land team if true",
+                    "type": "boolean",
+                    "required": false,
+                    "default": true
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -33,9 +45,12 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
+    "dependencies": {
+        "vscode": "^1.1.6",
+        "gherkin": "^5.1.0"
+    },
     "devDependencies": {
         "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
         "tslint": "^5.8.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
