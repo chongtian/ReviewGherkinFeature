@@ -20,6 +20,7 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
 3. The feature file should follow guidelines of P2 Land team
    * Scenario should refer to a VSTS Test Case
    * Scenario should refer to at least one User Story or Bug
+   * Duplicate test case id is not allowed
 
 If your feature file has errors of the first type, you must fix your feature file before check-in. Otherwise the sync tool and the Automation test cannot handle your feature file.
 

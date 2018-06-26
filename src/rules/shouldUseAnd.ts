@@ -8,7 +8,7 @@ export function shouldUseAnd(gherkinDocument: any): Array<IReviewMessage> {
     feature.children.forEach((scenario: any) => {
       let previousKeyword: string = '';
       scenario.steps.forEach((step: any) => {
-        if (step.keyword === 'And') {
+        if (step.keyword === 'And ') {
           return;
         }
         if (step.keyword === previousKeyword) {
