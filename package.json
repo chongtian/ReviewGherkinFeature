@@ -2,7 +2,7 @@
     "name": "p2landreviewfeature",
     "displayName": "P2 Land Review Feature File",
     "description": "Review feature file following P2 Land team's guideline",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "TonyGao",
     "repository": {
         "type": "git",
