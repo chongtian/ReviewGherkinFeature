@@ -41,21 +41,22 @@ function getFormattedFatalError(error: any): IReviewMessage {
     let result: IReviewMessage;
     let errorMsg: string;
 
+    let regex_testExamples = /expected:.*got \'Examples:\'/gi;
+    let regex_testTable = /expected: #EOF, #TableRow,.*#TagLine, #ExamplesLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got \'/gi;
+    let regex_testKeyword = /expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, .*#ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got \'(?!Examples)/gi;
+
     let errorLine = error.message.match(/\((\d+):.*/)[1];
+
     if (error.message.indexOf('got \'Background') > -1) {
         errorMsg = 'Multiple "Background" definitions in the same file are disallowed';
     } else if (error.message.indexOf('got \'Feature') > -1) {
         errorMsg = 'Multiple "Feature" definitions in the same file are disallowed';
-    } else if (error.message.indexOf('expected: #EOF, #TableRow, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got \'Examples:\'') > -1) {
+    } else if (regex_testExamples.test(error.message)) {
         errorMsg = 'Cannot use "Examples" in a "Scenario", use a "Scenario Outline" instead';
-    } else if (error.message.indexOf('expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got') > -1 ||
-        //line does not begin with Gherkin keyword    
-        error.message.indexOf('expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ExamplesLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got') > -1) {
+    } else if (regex_testKeyword.test(error.message)) {
+        //line does not begin with Gherkin keyword   
         errorMsg = 'Steps should begin with "Given", "When", "Then", "And" or "But".';
-    } else if (error.message.indexOf('inconsistent cell count within the table') > -1 ||
-        error.message.indexOf('expected: #EOF, #TableRow, #StepLine, #TagLine, #ExamplesLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got \'') > -1 ||
-        error.message.indexOf('expected: #EOF, #TableRow, #TagLine, #ExamplesLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got \'') > -1
-    ) {
+    } else if (regex_testTable.test(error.message)) {
         // invalid dataTable
         errorMsg = 'inconsistent cell count within the table';
     }
