@@ -8,10 +8,11 @@ export function scenarioShouldReferToUserStoryOrBug(gherkinDocument: any): Array
 
     //get all # Stories: and # Bugs:
     let references: Array<number> = [];
-    let regex = /\s*(Stories:|Bugs:)\s*\d*/gim;
+    
     if (comments) {
         comments.forEach((comment: any) => {
             if (comment.type === 'Comment') {
+                let regex = /\s*(Stories:|Bugs:)\s*\d{5,}/gi;
                 let commentText = comment.text;
                 if (regex.test(commentText)) {
                     references.push(comment.location.line);
