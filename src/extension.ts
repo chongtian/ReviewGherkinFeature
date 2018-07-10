@@ -6,7 +6,7 @@ import { review } from './reviewFeature';
 
 export function activate(context: vscode.ExtensionContext) {
 
-    let channel = vscode.window.createOutputChannel('P2 Land Review Feature');
+    let channel = vscode.window.createOutputChannel('Review Gherkin Feature');
     let disposable_review = vscode.commands.registerCommand('extension.reviewFeature', ()=>review(channel));
     context.subscriptions.push(disposable_review);
 }
