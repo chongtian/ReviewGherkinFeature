@@ -4,7 +4,7 @@ This is the README for the extension "Review Gherkin Feature".
 
 ## Features
 
-This extension reviews Gherkin feature file following P2 Land team's feature file guideline. It is based on [Gherkin Parser](https://github.com/cucumber/gherkin-javascript). It verifies:
+This extension is based on [Gherkin Parser](https://github.com/cucumber/gherkin-javascript) and verifies the following in Gherkin feature files:
 
 1. The feature file should not have any fatal error, including:
    * Count of cells should be consistent within a Gherkin table
