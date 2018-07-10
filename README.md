@@ -1,4 +1,4 @@
-# P2 Land Review Feature README
+# Review Gherkin Feature
 
 This is the README for the extension "Review Gherkin Feature".  
 
@@ -35,7 +35,7 @@ After you complete your feature file, press F1 to show Command Palette, and type
 > Tip: To open Command Palette, press F1 or Ctrl+Shift+P
 >
 - If the feature file passes the review, you will see an information message *Feature file is good*.
-- If the feature file has issues, you will see an warning message *Feature file has issues. Please check output for details*, or an error message in case fatal error occurred. In this case, please open Output and select **P2 Land Review Feature** from the drop down on the Output. You will then see the details of the issues.
+- If the feature file has issues, you will see an warning message *Feature file has issues. Please check output for details*, or an error message in case fatal error occurred. In this case, please open Output and select **Review Gherkin Feature** from the drop down on the Output. You will then see the details of the issues.
 
 > Tip: To open Output, press Ctrl+Shift+U
 
