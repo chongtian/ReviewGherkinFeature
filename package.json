@@ -1,12 +1,12 @@
 {
-    "name": "p2landreviewfeature",
-    "displayName": "P2 Land Review Feature File",
-    "description": "Review feature file following P2 Land team's guideline",
-    "version": "0.0.3",
+    "name": "reviewgherkinfeature",
+    "displayName": "Review Gherkin Feature File",
+    "description": "Review Gherkin feature file",
+    "version": "0.0.4",
     "publisher": "TonyGao",
     "repository": {
         "type": "git",
-        "url": "https://github.com/chongtian/ReviewP2LandFeature.git"
+        "url": "https://github.com/chongtian/ReviewGherkinFeature.git"
     },
     "engines": {
         "vscode": "^1.16.0"
@@ -27,10 +27,10 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "P2 Land team review Gherkin feature file settings",
+            "title": "Review Gherkin feature file settings",
             "properties": {
                 "reviewfeature.p2land": {
-                    "description": "Enable extra validation based on guidelines from P2 Land team if true",
+                    "description": "Enable extra validations if true",
                     "type": "boolean",
                     "required": false,
                     "default": true
