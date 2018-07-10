@@ -30,7 +30,7 @@ If your feature file has errors of the third type, you should consider fixing it
 This extension is not published to VS Code Marketplace. Thus, please install from local vsix file.
 
 ## How to use the extension
-![](https://raw.githubusercontent.com/chongtian/ReviewP2LandFeature/master/img/HowToUse.gif)
+![](https://raw.githubusercontent.com/chongtian/ReviewGherkinFeature/master/img/HowToUse.gif)
 After you complete your feature file, press F1 to show Command Palette, and type and execute **Review Feature**. The extension will review the feature file.
 > Tip: To open Command Palette, press F1 or Ctrl+Shift+P
 >
@@ -40,6 +40,6 @@ After you complete your feature file, press F1 to show Command Palette, and type
 > Tip: To open Output, press Ctrl+Shift+U
 
 ## Source codes
-[GitHub](https://github.com/chongtian/ReviewP2LandFeature)
+[GitHub](https://github.com/chongtian/ReviewGherkinFeature)
 
 
