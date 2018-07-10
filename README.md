@@ -1,6 +1,6 @@
 # P2 Land Review Feature README
 
-This is the README for the extension "P2 Land Review Feature".  
+This is the README for the extension "Review Gherkin Feature".  
 
 ## Features
 
@@ -17,7 +17,7 @@ This extension reviews Gherkin feature file following P2 Land team's feature fil
    * Scenario should not use variables(parameters) 
    * Scenario Outline should not have undefined variables
    * Should use And if the scenario has multiple Given, When, or Then steps
-3. The feature file should follow guidelines of P2 Land team
+3. The feature file should follow extra customized guidelines
    * Scenario should refer to a VSTS Test Case
    * Scenario should refer to at least one User Story or Bug
    * Duplicate test case id is not allowed
